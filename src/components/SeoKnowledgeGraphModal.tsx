@@ -19,15 +19,15 @@ export const SeoKnowledgeGraphModal: React.FC<SeoKnowledgeGraphModalProps> = ({
   "@graph": [
     {
       "@type": "ProfilePage",
-      "@id": "https://joshua-lokodi-dev.ai/#profilepage",
+      "@id": "https://www.joshualokodi.site/#profilepage",
       "name": "Joshua Maazo Lokodi | Top Software Developer & AI Systems Engineer",
       "description": "Official portfolio of Joshua Maazo Lokodi — Expert Full Stack Engineer, AI Automation Specialist, and UI/UX Designer."
     },
     {
       "@type": "Person",
-      "@id": "https://joshua-lokodi-dev.ai/#person",
+      "@id": "https://www.joshualokodi.site/#person",
       "name": "Joshua Maazo Lokodi",
-      "alternateName": ["Joshua Dev", "Joshua Lokodi"],
+      "alternateName": ["Joshua Dev", "Joshua Lokodi", "Joshua Maazo", "Joshua"],
       "jobTitle": "Software Developer & AI Systems Engineer",
       "knowsAbout": [
         "Software Development",
