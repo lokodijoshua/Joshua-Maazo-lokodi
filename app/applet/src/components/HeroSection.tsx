@@ -212,9 +212,10 @@ Software Developer with expertise in AI Automation, Full Stack Engineering, and 
                   <div className="relative bg-lime-300 border-neo-thick rounded-xl p-2.5 shadow-neo">
                     <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg border-neo bg-black flex items-center justify-center">
                       <img
-                        src={photoUrl}
+                        key="official-portrait"
+                        src="https://res.cloudinary.com/dyzlx6pnt/image/upload/v1792022631/IMG_0752_jjffg8.jpg"
                         alt="Joshua Maazo Lokodi - Software Developer & AI Systems Engineer"
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-center"
                         referrerPolicy="no-referrer"
                       />
                     </div>

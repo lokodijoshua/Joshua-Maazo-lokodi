@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { DEVELOPER_INFO } from '../data/portfolioData';
-import { ThreeModelScene } from './ThreeModelScene';
+import React from 'react';
+import { DEVELOPER_INFO } from '@/src/data/portfolioData';
 import { 
-  ArrowUpRight, Download, Github, Linkedin, Twitter, Mail, 
-  Camera, Upload, Sparkles, Box, RefreshCw
+  ArrowUpRight, Download, Github, Linkedin, Twitter, Mail 
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -16,15 +14,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onScrollToProjects,
   onOpenContact
 }) => {
-  const [photoUrl, setPhotoUrl] = useState<string>("/src/assets/images/joshua_developer_portrait_1792017902668.jpg");
-  const [activeRightTab, setActiveRightTab] = useState<'photo' | '3d'>('photo');
-  const [showPhotoModal, setShowPhotoModal] = useState(false);
-  const [tempUrlInput, setTempUrlInput] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
   const handleDownloadResume = () => {
-    const resumeText = `# JOSHUA MAAZO LOKODI
-Software Developer & AI Systems Engineer
+    const resumeText = `# ${DEVELOPER_INFO.name}
+${DEVELOPER_INFO.title}
 Email: ${DEVELOPER_INFO.email} | Open to Global & Remote Roles
 
 ## PROFESSIONAL SUMMARY
@@ -57,20 +49,6 @@ Software Developer with expertise in AI Automation, Full Stack Engineering, and 
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setPhotoUrl(event.target.result as string);
-          setShowPhotoModal(false);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   return (
@@ -133,15 +111,6 @@ Software Developer with expertise in AI Automation, Full Stack Engineering, and 
                 <span>DOWNLOAD RESUME</span>
                 <Download className="w-5 h-5" />
               </button>
-
-              <button
-                onClick={() => setActiveRightTab(activeRightTab === '3d' ? 'photo' : '3d')}
-                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-3 text-xs sm:text-sm font-bold bg-purple-100 hover:bg-purple-200 text-purple-900 border-neo rounded-lg transition-colors"
-                title="Toggle between Developer Photo and Interactive 3D Model"
-              >
-                <Box className="w-4 h-4 text-purple-700" />
-                <span>{activeRightTab === '3d' ? 'VIEW PHOTO' : 'VIEW 3D ASSET'}</span>
-              </button>
             </div>
 
             {/* Connect With Me Socials */}
@@ -184,86 +153,25 @@ Software Developer with expertise in AI Automation, Full Stack Engineering, and 
                 >
                   <Mail className="w-5 h-5" />
                 </button>
-                <span className="text-xs font-mono text-gray-500 ml-2 hidden sm:inline">
-                  {DEVELOPER_INFO.email}
-                </span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Signature Neobrutalist Media Card */}
           <div className="lg:col-span-5 relative flex flex-col items-center">
-            {/* Outer Pink Card Frame */}
             <div className="relative w-full max-w-[440px] bg-rose-300 border-neo-thick shadow-neo-lg rounded-2xl p-4 sm:p-5">
               
-              {/* Media Mode Switcher Tabs */}
-              <div className="flex items-center justify-between mb-3 bg-white border-neo rounded-lg p-1 font-mono text-xs font-bold">
-                <button
-                  onClick={() => setActiveRightTab('photo')}
-                  className={`flex-1 py-1 text-center rounded transition-all ${
-                    activeRightTab === 'photo' 
-                      ? 'bg-rose-400 text-black font-extrabold shadow-neo-sm' 
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  [DEVELOPER PHOTO]
-                </button>
-                <button
-                  onClick={() => setActiveRightTab('3d')}
-                  className={`flex-1 py-1 text-center rounded transition-all flex items-center justify-center gap-1 ${
-                    activeRightTab === '3d' 
-                      ? 'bg-purple-600 text-white font-extrabold shadow-neo-sm' 
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  <Box className="w-3.5 h-3.5" />
-                  <span>[3D TECH SCENE]</span>
-                </button>
+              {/* Developer Portrait */}
+              <div className="relative bg-lime-300 border-neo-thick rounded-xl p-2.5 shadow-neo">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg border-neo bg-black flex items-center justify-center">
+                  <img
+                    src="https://res.cloudinary.com/dyzlx6pnt/image/upload/v1792022631/IMG_0752_jjffg8.jpg"
+                    alt="Joshua Maazo Lokodi"
+                    className="w-full h-full object-cover object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
               </div>
-
-              {/* View 1: Developer Photo Card */}
-              {activeRightTab === 'photo' ? (
-                <div className="relative">
-                  {/* Green Inner Photo Frame */}
-                  <div className="relative bg-lime-300 border-neo-thick rounded-xl p-2.5 shadow-neo">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg border-neo bg-slate-900 flex items-center justify-center">
-                      <img
-                        src={photoUrl}
-                        alt="Joshua Maazo Lokodi - Software Developer"
-                        className="w-full h-full object-cover object-top"
-                        referrerPolicy="no-referrer"
-                        onError={(e) => {
-                          // Stylized fallback SVG if image is not loaded
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                      {/* Styled fallback avatar */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900 text-white p-4 text-center -z-0">
-                        <div className="w-24 h-24 rounded-full bg-lime-300 text-black border-2 border-black flex items-center justify-center text-3xl font-black font-mono shadow-neo mb-3">
-                          JL
-                        </div>
-                        <div className="font-extrabold text-base tracking-wider uppercase">JOSHUA MAAZO LOKODI</div>
-                        <div className="text-xs font-mono text-lime-300 mt-1">Full Stack & AI Engineer</div>
-                      </div>
-
-                      {/* Replace Photo Quick Button Overlay */}
-                      <button
-                        onClick={() => setShowPhotoModal(true)}
-                        className="absolute bottom-2 right-2 z-10 flex items-center gap-1.5 px-2.5 py-1.5 bg-white/95 hover:bg-white border-neo shadow-neo-sm rounded-md text-xs font-mono font-bold text-black transition-all hover:scale-105"
-                        title="Replace or upload developer photo"
-                      >
-                        <Camera className="w-3.5 h-3.5 text-purple-700" />
-                        <span>REPLACE PHOTO</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                /* View 2: Three.js 3D Procedural Scene */
-                <div className="relative w-full aspect-[3/4] min-h-[380px]">
-                  <ThreeModelScene className="w-full h-full" isInteractive={true} />
-                </div>
-              )}
 
               {/* Signature Retro Floating Terminal Card */}
               <div className="mt-3 p-3 bg-purple-900 text-purple-100 border-neo shadow-neo rounded-xl font-mono text-[11px] leading-relaxed">
@@ -291,93 +199,6 @@ Software Developer with expertise in AI Automation, Full Stack Engineering, and 
 
         </div>
       </div>
-
-      {/* Hidden File Input for Custom Photo Upload */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileUpload}
-        accept="image/*"
-        className="hidden"
-      />
-
-      {/* Photo Replacement Modal */}
-      {showPhotoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white border-neo-thick shadow-neo-lg rounded-2xl p-6">
-            <div className="flex items-center justify-between pb-3 border-b-2 border-black mb-4">
-              <h3 className="font-extrabold text-lg text-black font-mono">REPLACE DEVELOPER PHOTO</h3>
-              <button
-                onClick={() => setShowPhotoModal(false)}
-                className="p-1 hover:bg-gray-100 border-neo rounded"
-              >
-                ✕
-              </button>
-            </div>
-
-            <p className="text-xs text-gray-600 mb-4 font-medium">
-              Upload your own photo or paste any direct image URL to customize Joshua's portrait.
-            </p>
-
-            {/* Option 1: Local file upload */}
-            <div className="mb-4">
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-lime-300 hover:bg-lime-400 border-neo shadow-neo rounded-lg font-bold text-sm text-black transition-all"
-              >
-                <Upload className="w-4 h-4" />
-                <span>Upload From Your Computer</span>
-              </button>
-            </div>
-
-            <div className="text-center text-xs font-mono text-gray-500 my-2">— OR PASTE IMAGE URL —</div>
-
-            {/* Option 2: Image URL */}
-            <div className="flex gap-2 mb-4">
-              <input
-                type="url"
-                placeholder="https://example.com/photo.jpg"
-                value={tempUrlInput}
-                onChange={(e) => setTempUrlInput(e.target.value)}
-                className="flex-1 px-3 py-2 text-xs border-neo rounded bg-gray-50"
-              />
-              <button
-                onClick={() => {
-                  if (tempUrlInput.trim()) {
-                    setPhotoUrl(tempUrlInput.trim());
-                    setShowPhotoModal(false);
-                    setTempUrlInput("");
-                  }
-                }}
-                className="px-3 py-2 bg-purple-600 text-white font-bold text-xs border-neo rounded hover:bg-purple-700"
-              >
-                Apply
-              </button>
-            </div>
-
-            {/* Reset to default */}
-            <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
-              <button
-                onClick={() => {
-                  setPhotoUrl("/src/assets/images/joshua_developer_portrait_1792017902668.jpg");
-                  setShowPhotoModal(false);
-                }}
-                className="text-xs font-mono text-gray-500 hover:text-black flex items-center gap-1"
-              >
-                <RefreshCw className="w-3 h-3" />
-                <span>Reset to default portrait</span>
-              </button>
-
-              <button
-                onClick={() => setShowPhotoModal(false)}
-                className="px-3 py-1 text-xs border-neo rounded bg-gray-100"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

@@ -16,9 +16,9 @@ export const DEVELOPER_INFO = {
   passion: 'Crafting resilient human-centric software'
 }`,
   socials: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://x.com",
+    github: "https://github.com/lokodijoshua",
+    linkedin: "https://www.linkedin.com/in/joshua-lokodi-ab0a58387/",
+    twitter: "https://x.com/JoshuaLoko71975",
     email: "mailto:lokodijoshua@gmail.com"
   },
   stats: {
