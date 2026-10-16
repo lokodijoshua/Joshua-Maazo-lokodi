@@ -21,7 +21,8 @@ export const SeoKnowledgeGraphModal: React.FC<SeoKnowledgeGraphModalProps> = ({
       "@type": "ProfilePage",
       "@id": "https://www.joshualokodi.site/#profilepage",
       "name": "Joshua Maazo Lokodi | Top Software Developer & AI Systems Engineer",
-      "description": "Official portfolio of Joshua Maazo Lokodi — Expert Full Stack Engineer, AI Automation Specialist, and UI/UX Designer."
+      "description": "Official portfolio of Joshua Maazo Lokodi — Expert Full Stack Engineer, AI Automation Specialist, and UI/UX Designer.",
+      "mainEntity": { "@id": "https://www.joshualokodi.site/#person" }
     },
     {
       "@type": "Person",
